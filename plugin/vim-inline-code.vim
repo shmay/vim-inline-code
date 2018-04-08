@@ -48,9 +48,9 @@ function! s:opfunc(type,vis)
   "normal gvx
   let @x = inlined_code
   if s:Last_line_is_selected()
-    normal "xp0
+    normal "xp0yy
   else
-    normal "xP0
+    normal "xP0yy
   endif
 
   "echom v:count
