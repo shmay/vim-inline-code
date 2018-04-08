@@ -1,4 +1,4 @@
-command! -range -nargs=0 InlineCode :call s:opfunc()
+command! -range -nargs=0 InlineCode :call s:opfunc("no")
 command! -range -nargs=0 InlineCodeWithSeparator :call s:separatorfunc()
 
 " function jacked from
