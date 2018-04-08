@@ -1,4 +1,5 @@
-command! -range -nargs=0 InlineCode :call s:opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)
+command! -range -nargs=0 InlineCode :call s:opfunc()
+command! -range -nargs=0 InlineCodeWithSeparator :call s:separatorfunc()
 
 " function jacked from
 " http://stackoverflow.com/a/6271254/548170
@@ -22,7 +23,17 @@ function! s:Last_line_is_selected()
   return s:lnum == (line("$") + 1)
 endfunction
 
-function! s:opfunc(type,vis)
+function! s:Strip(input_string)
+    return substitute(a:input_string, '^\s*\(.\{-}\)\n\s*$', '\1', '')
+endfunction
+
+function! s:separatorfunc()
+  call s:opfunc("yes")
+endfunction
+
+function! s:opfunc(with_separator)
+  echom 'with_separator: ' . a:with_separator
+
   let s:Fn = function("s:Get_visual_selection")
   let s:selection = call(s:Fn, [])
 
@@ -42,11 +53,17 @@ function! s:opfunc(type,vis)
 
   call s:WriteToNewBuffer("inlined_code")
 
-  let inlined_code = substitute(s:selection, '\n', ' ', 'g')
+  if a:with_separator == "yes"
+    let inlined_code = substitute(s:selection, '\n', ';', 'g')
+  else
+    let inlined_code = substitute(s:selection, '\n', ' ', 'g')
+  endif
+
   " remove multiple spaces
   let inlined_code = substitute(inlined_code, '  \+', ' ', 'g')
   "normal gvx
-  let @x = inlined_code
+  let @x = s:Strip(inlined_code)
+
   if s:Last_line_is_selected()
     normal "xp0yy
   else

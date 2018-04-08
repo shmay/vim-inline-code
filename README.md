@@ -6,12 +6,12 @@ Simply select the code you'd like to convert to one line and run
 
 `:'<,'>InlineCode`
 
+If you'd like to add a semicolon between the lines, do `:'<,'>InlineCodeWithSeparator`
+
 <img src='inline3.gif' />
 
 ### TODO
 
-* Add InlineCodeWithSeparator
-  * add semicolon to end of each line
 * Add InlineCodeRubyModule
   * this will convert nested modules into One::Two syntax
 * Add InlineCodeWithoutWindow possibly?
