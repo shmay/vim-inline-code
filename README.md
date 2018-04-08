@@ -6,8 +6,7 @@ Simply select the code you'd like to convert to one line and run
 
 `:'<,'>InlineCode`
 
-<img src='inline.gif' />
-
+<img src='inline3.gif' />
 
 ### TODO
 
